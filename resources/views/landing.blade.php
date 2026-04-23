@@ -48,7 +48,7 @@
             {{-- Menu Tengah --}}
             <div class="hidden md:flex items-center gap-8">
                 <a href="#daftar-pengaduan" class="text-navy hover:text-brown font-semibold text-sm transition">
-                    <i class="fa-solid fa-list mr-2"></i>Daftar Pengaduan
+                    <i></i>Daftar Pengaduan
                 </a>
             </div>
 
