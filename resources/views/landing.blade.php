@@ -47,8 +47,11 @@
 
             {{-- Menu Tengah --}}
             <div class="hidden md:flex items-center gap-8">
+                <a href="#tentang" class="text-navy hover:text-brown font-semibold text-sm transition">
+                    Tentang
+                </a>
                 <a href="#daftar-pengaduan" class="text-navy hover:text-brown font-semibold text-sm transition">
-                    <i></i>Daftar Pengaduan
+                    Daftar Pengaduan
                 </a>
             </div>
 
@@ -189,31 +192,56 @@
         </div>
     </section>
 
-    {{-- Kategori --}}
-    <section class="py-20 bg-white">
+
+
+    {{-- Tentang --}}
+    <section id="tentang" class="py-20 bg-light-brown/10">
         <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-navy mb-3">Kategori Pengaduan</h2>
-                <p class="text-light-brown">Laporkan berbagai jenis masalah sarana sekolah</p>
+            <div class="text-center mb-14">
+                <h2 class="text-3xl font-bold text-navy mb-3">Tentang Sistem</h2>
+                <p class="text-light-brown max-w-2xl mx-auto">Platform inovatif yang memudahkan siswa melaporkan masalah sarana sekolah dengan cepat dan transparan.</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                @foreach([
-                ['icon' => 'fa-broom', 'label' => 'Kebersihan', 'color' => 'bg-green-50 text-green-700'],
-                ['icon' => 'fa-shield-halved', 'label' => 'Keamanan', 'color' => 'bg-red-50 text-red-700'],
-                ['icon' => 'fa-screwdriver-wrench','label' => 'Fasilitas','color' => 'bg-navy/10 text-navy'],
-                ['icon' => 'fa-droplet', 'label' => 'Sanitasi', 'color' => 'bg-cyan-50 text-cyan-700'],
-                ['icon' => 'fa-ellipsis', 'label' => 'Lainnya', 'color' => 'bg-gold/20 text-gold'],
-                ] as $kat)
-                <div class="flex flex-col items-center gap-3 p-5 rounded-2xl border border-light-brown/30 hover:shadow-lg hover:border-gold/50 transition">
-                    <div class="w-14 h-14 {{ $kat['color'] }} rounded-xl flex items-center justify-center">
-                        <i class="fa-solid {{ $kat['icon'] }} text-xl"></i>
-                    </div>
-                    <p class="font-medium text-navy text-sm">{{ $kat['label'] }}</p>
+
+            <div class="grid gap-8 lg:grid-cols-2 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-navy mb-4">Fitur Utama</h3>
+                    <ul class="space-y-4 text-light-brown">
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 inline-flex h-3 w-3 rounded-full bg-navy"></span>
+                            <div>
+                                <p class="font-semibold text-navy">Transparan</p>
+                                <p class="text-sm">Pantau status pengaduan dari awal hingga selesai dengan mudah.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 inline-flex h-3 w-3 rounded-full bg-navy"></span>
+                            <div>
+                                <p class="font-semibold text-navy">Cepat</p>
+                                <p class="text-sm">Kelola dan proses pengaduan dengan sistem yang efisien.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="mt-1 inline-flex h-3 w-3 rounded-full bg-navy"></span>
+                            <div>
+                                <p class="font-semibold text-navy">Mudah</p>
+                                <p class="text-sm">Filter pengaduan berdasarkan kategori dan status untuk kemudahan pencarian.</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                @endforeach
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-light-brown/30">
+                    <div class="w-16 h-16 bg-navy rounded-2xl flex items-center justify-center mx-auto mb-5">
+                        <i class="fa-solid fa-info text-gold text-2xl"></i>
+                    </div>
+                    <p class="text-center text-light-brown">
+                        Sistem ini dirancang untuk memfasilitasi komunikasi antara siswa dan admin sekolah dalam menangani masalah sarana dan prasarana.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
+
+
 
     @if(isset($aspirasis))
     {{-- Tabel Pengaduan Publik --}}
@@ -224,7 +252,7 @@
                 <p class="text-light-brown max-w-2xl mx-auto">Lihat seluruh pengaduan yang masuk. Guest hanya dapat melihat dan memfilter, sementara aksi edit/hapus hanya untuk pengguna terautentikasi.</p>
             </div>
 
-            <div class="grid gap-4 lg:grid-cols-3 mb-6" id="filter-form">
+            <div class="grid gap-4 lg:grid-cols-3 mb-4" id="filter-form">
                 <div>
                     <label class="block text-sm font-semibold text-navy mb-2">Pencarian</label>
                     <input type="search" id="search-input" value="{{ request('q') }}" placeholder="Cari kategori, lokasi, atau kata kunci"
@@ -250,6 +278,15 @@
                         <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 justify-end mb-6">
+                <button id="filter-button" class="px-6 py-3 bg-navy text-white rounded-xl text-sm font-semibold hover:bg-brown transition">
+                    <i class="fa-solid fa-filter mr-2"></i>Filter
+                </button>
+                <button id="reset-button" class="px-6 py-3 border border-light-brown rounded-xl text-sm font-semibold text-navy hover:bg-light-brown/30 transition">
+                    <i class="fa-solid fa-xmark mr-2"></i>Reset
+                </button>
             </div>
 
             <div class="overflow-x-auto bg-white rounded-3xl shadow-sm border border-light-brown/30">
@@ -373,6 +410,8 @@
             const searchInput = document.getElementById('search-input');
             const kategoriSelect = document.getElementById('kategori-select');
             const statusSelect = document.getElementById('status-select');
+            const filterButton = document.getElementById('filter-button');
+            const resetButton = document.getElementById('reset-button');
             const tableContainer = document.querySelector('.overflow-x-auto');
             const paginationContainer = document.querySelector('.flex.flex-wrap.gap-2');
             const totalText = document.querySelector('p.font-semibold.text-navy');
@@ -380,7 +419,6 @@
             let searchTimeout;
 
             function attachPaginationListeners() {
-                // Attach click listeners to pagination links for live search
                 const paginationLinks = document.querySelectorAll('.flex.flex-wrap.gap-2 a');
                 paginationLinks.forEach(link => {
                     link.addEventListener('click', function(e) {
@@ -388,28 +426,25 @@
                         const url = new URL(this.href);
                         const page = url.searchParams.get('page');
 
-                        // Update current filters with page
+                        const params = new URLSearchParams();
                         const q = searchInput.value;
                         const id_kategori = kategoriSelect.value;
                         const status = statusSelect.value;
 
-                        const params = new URLSearchParams();
                         if (q) params.append('q', q);
                         if (id_kategori) params.append('id_kategori', id_kategori);
                         if (status) params.append('status', status);
                         if (page) params.append('page', page);
 
-                        // Show loading
                         tableContainer.innerHTML = `
                             <div class="flex items-center justify-center py-12">
                                 <div class="flex items-center gap-3 text-light-brown">
                                     <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-navy"></div>
                                     <span>Memuat halaman...</span>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
 
-                        // Fetch page data
                         fetch(`/?${params.toString()}`, {
                                 headers: {
                                     'X-Requested-With': 'XMLHttpRequest',
@@ -417,31 +452,7 @@
                                 }
                             })
                             .then(response => response.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-
-                                // Update table
-                                const newTable = doc.querySelector('.overflow-x-auto');
-                                if (newTable) {
-                                    tableContainer.innerHTML = newTable.innerHTML;
-                                }
-
-                                // Update pagination
-                                const newPagination = doc.querySelector('.flex.flex-wrap.gap-2');
-                                if (newPagination) {
-                                    paginationContainer.innerHTML = newPagination.innerHTML;
-                                }
-
-                                // Update total count
-                                const newTotal = doc.querySelector('p.font-semibold.text-navy');
-                                if (newTotal) {
-                                    totalText.textContent = newTotal.textContent;
-                                }
-
-                                // Re-attach listeners
-                                attachPaginationListeners();
-                            })
+                            .then(updateTableContent)
                             .catch(error => {
                                 console.error('Pagination error:', error);
                                 tableContainer.innerHTML = `
@@ -455,12 +466,35 @@
                 });
             }
 
+            function updateTableContent(html) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                const newTable = doc.querySelector('.overflow-x-auto');
+                if (newTable) {
+                    tableContainer.innerHTML = newTable.innerHTML;
+                }
+
+                const newPagination = doc.querySelector('.flex.flex-wrap.gap-2');
+                if (newPagination) {
+                    paginationContainer.innerHTML = newPagination.innerHTML;
+                } else {
+                    paginationContainer.innerHTML = '';
+                }
+
+                const newTotal = doc.querySelector('p.font-semibold.text-navy');
+                if (newTotal) {
+                    totalText.textContent = newTotal.textContent;
+                }
+
+                attachPaginationListeners();
+            }
+
             function performSearch() {
                 const q = searchInput.value;
                 const id_kategori = kategoriSelect.value;
                 const status = statusSelect.value;
 
-                // Show loading state
                 tableContainer.innerHTML = `
                     <div class="flex items-center justify-center py-12">
                         <div class="flex items-center gap-3 text-light-brown">
@@ -470,13 +504,11 @@
                     </div>
                 `;
 
-                // Build query string
                 const params = new URLSearchParams();
                 if (q) params.append('q', q);
                 if (id_kategori) params.append('id_kategori', id_kategori);
                 if (status) params.append('status', status);
 
-                // Fetch data
                 fetch(`/?${params.toString()}`, {
                         headers: {
                             'X-Requested-With': 'XMLHttpRequest',
@@ -484,31 +516,7 @@
                         }
                     })
                     .then(response => response.text())
-                    .then(html => {
-                        // Parse the HTML response
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-
-                        // Update table
-                        const newTable = doc.querySelector('.overflow-x-auto');
-                        if (newTable) {
-                            tableContainer.innerHTML = newTable.innerHTML;
-                        }
-
-                        // Update pagination
-                        const newPagination = doc.querySelector('.flex.flex-wrap.gap-2');
-                        if (newPagination) {
-                            paginationContainer.innerHTML = newPagination.innerHTML;
-                        } else {
-                            paginationContainer.innerHTML = '';
-                        }
-
-                        // Update total count
-                        const newTotal = doc.querySelector('p.font-semibold.text-navy');
-                        if (newTotal) {
-                            totalText.textContent = newTotal.textContent;
-                        }
-                    })
+                    .then(updateTableContent)
                     .catch(error => {
                         console.error('Search error:', error);
                         tableContainer.innerHTML = `
@@ -520,99 +528,31 @@
                     });
             }
 
-            // Event listeners
+            function resetFilters() {
+                searchInput.value = '';
+                kategoriSelect.value = '';
+                statusSelect.value = '';
+                performSearch();
+            }
+
             searchInput.addEventListener('input', () => {
                 clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(performSearch, 300); // Debounce 300ms
+                searchTimeout = setTimeout(performSearch, 300);
             });
 
             kategoriSelect.addEventListener('change', performSearch);
             statusSelect.addEventListener('change', performSearch);
+            filterButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                performSearch();
+            });
+            resetButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                resetFilters();
+            });
 
-            // Initial pagination listeners
             attachPaginationListeners();
         });
-
-        function attachPaginationListeners() {
-            // Attach click listeners to pagination links for live search
-            const paginationLinks = document.querySelectorAll('.flex.flex-wrap.gap-2 a');
-            paginationLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const url = new URL(this.href);
-                    const page = url.searchParams.get('page');
-
-                    // Update current filters with page
-                    const searchInput = document.getElementById('search-input');
-                    const kategoriSelect = document.getElementById('kategori-select');
-                    const statusSelect = document.getElementById('status-select');
-                    const tableContainer = document.querySelector('.overflow-x-auto');
-                    const paginationContainer = document.querySelector('.flex.flex-wrap.gap-2');
-                    const totalText = document.querySelector('p.font-semibold.text-navy');
-
-                    const q = searchInput.value;
-                    const id_kategori = kategoriSelect.value;
-                    const status = statusSelect.value;
-
-                    const params = new URLSearchParams();
-                    if (q) params.append('q', q);
-                    if (id_kategori) params.append('id_kategori', id_kategori);
-                    if (status) params.append('status', status);
-                    if (page) params.append('page', page);
-
-                    // Show loading
-                    tableContainer.innerHTML = `
-                        <div class="flex items-center justify-center py-12">
-                            <div class="flex items-center gap-3 text-light-brown">
-                                <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-navy"></div>
-                                <span>Memuat halaman...</span>
-                            </div>
-                        </div>
-                    `;
-
-                    // Fetch page data
-                    fetch(`/?${params.toString()}`, {
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-                            }
-                        })
-                        .then(response => response.text())
-                        .then(html => {
-                            const parser = new DOMParser();
-                            const doc = parser.parseFromString(html, 'text/html');
-
-                            // Update table
-                            const newTable = doc.querySelector('.overflow-x-auto');
-                            if (newTable) {
-                                tableContainer.innerHTML = newTable.innerHTML;
-                            }
-
-                            // Update pagination
-                            const newPagination = doc.querySelector('.flex.flex-wrap.gap-2');
-                            if (newPagination) {
-                                paginationContainer.innerHTML = newPagination.innerHTML;
-                            }
-
-                            // Update total count
-                            const newTotal = doc.querySelector('p.font-semibold.text-navy');
-                            if (newTotal) {
-                                totalText.textContent = newTotal.textContent;
-                            }
-
-                            // Re-attach pagination event listeners for live search
-                            attachPaginationListeners();
-                            console.error('Pagination error:', error);
-                            tableContainer.innerHTML = `
-                            <div class="text-center py-12 text-red-600">
-                                <i class="fa-solid fa-exclamation-triangle text-3xl mb-2"></i>
-                                <p>Terjadi kesalahan saat memuat halaman</p>
-                            </div>
-                        `;
-                        });
-                });
-            });
-        }
     </script>
 
 </body>
