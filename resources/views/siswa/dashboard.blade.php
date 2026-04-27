@@ -337,6 +337,65 @@
             </div>
         </div>
 
+        {{-- Search & Filter Form --}}
+        <div class="px-8 py-6 bg-gradient-to-r from-cream to-gold/10 border-b border-light-brown/30">
+            <div class="flex flex-col lg:flex-row gap-4 items-center">
+                {{-- Search Input --}}
+                <div class="flex-1 relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-light-brown">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input type="text" id="publik-search-input"
+                        placeholder="Cari nama siswa, kategori, lokasi, atau detail..."
+                        value="{{ request('publik_q') }}"
+                        class="w-full pl-10 pr-4 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown focus:border-transparent">
+                </div>
+
+                {{-- Category Filter --}}
+                <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-light-brown text-xs">
+                        <i class="fa-solid fa-tag"></i>
+                    </span>
+                    <select id="publik-category-select" class="pl-8 pr-8 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown focus:border-transparent appearance-none bg-white">
+                        <option value="">Semua Kategori</option>
+                        @foreach($kategoris as $kategori)
+                        <option value="{{ $kategori->id_kategori }}" {{ request('publik_id_kategori') == $kategori->id_kategori ? 'selected' : '' }}>
+                            {{ $kategori->ket_kategori }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-light-brown pointer-events-none">
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </span>
+                </div>
+
+                {{-- Status Filter --}}
+                <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-light-brown text-xs">
+                        <i class="fa-solid fa-info-circle"></i>
+                    </span>
+                    <select id="publik-status-select" class="pl-8 pr-8 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown focus:border-transparent appearance-none bg-white">
+                        <option value="">Semua Status</option>
+                        @foreach($statusOptions as $status)
+                        <option value="{{ $status }}" {{ request('publik_status') == $status ? 'selected' : '' }}>
+                            {{ $status }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-light-brown pointer-events-none">
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </span>
+                </div>
+
+                {{-- Reset Button --}}
+                <button type="button" id="publik-reset-button"
+                    class="px-6 py-2.5 bg-gradient-to-r from-brown to-navy text-white rounded-lg text-sm font-semibold hover:from-navy hover:to-brown transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-gradient-to-r from-navy to-brown text-white">
@@ -382,4 +441,72 @@
         @endif
     </div>
 </div>
-@endsection
+@endsection/ *   J a v a S c r i p t   u n t u k   L i v e   S e a r c h   &   F i l t e r   * / 
+ < s c r i p t > 
+ d o c u m e n t . a d d E v e n t L i s t e n e r ( " D O M C o n t e n t L o a d e d " ,   f u n c t i o n ( )   { 
+         c o n s t   s e a r c h I n p u t   =   d o c u m e n t . g e t E l e m e n t B y I d ( " p u b l i k - s e a r c h - i n p u t " ) ; 
+         c o n s t   c a t e g o r y S e l e c t   =   d o c u m e n t . g e t E l e m e n t B y I d ( " p u b l i k - c a t e g o r y - s e l e c t " ) ; 
+         c o n s t   s t a t u s S e l e c t   =   d o c u m e n t . g e t E l e m e n t B y I d ( " p u b l i k - s t a t u s - s e l e c t " ) ; 
+         c o n s t   r e s e t B u t t o n   =   d o c u m e n t . g e t E l e m e n t B y I d ( " p u b l i k - r e s e t - b u t t o n " ) ; 
+ 
+         l e t   s e a r c h T i m e o u t ; 
+ 
+         f u n c t i o n   u p d a t e P u b l i k F i l t e r s ( )   { 
+                 c o n s t   p a r a m s   =   n e w   U R L S e a r c h P a r a m s ( w i n d o w . l o c a t i o n . s e a r c h ) ; 
+                 c o n s t   q u e r y   =   s e a r c h I n p u t . v a l u e . t r i m ( ) ; 
+                 c o n s t   c a t e g o r y   =   c a t e g o r y S e l e c t . v a l u e ; 
+                 c o n s t   s t a t u s   =   s t a t u s S e l e c t . v a l u e ; 
+ 
+                 i f   ( q u e r y )   { 
+                         p a r a m s . s e t ( " p u b l i k _ q " ,   q u e r y ) ; 
+                 }   e l s e   { 
+                         p a r a m s . d e l e t e ( " p u b l i k _ q " ) ; 
+                 } 
+ 
+                 i f   ( c a t e g o r y )   { 
+                         p a r a m s . s e t ( " p u b l i k _ i d _ k a t e g o r i " ,   c a t e g o r y ) ; 
+                 }   e l s e   { 
+                         p a r a m s . d e l e t e ( " p u b l i k _ i d _ k a t e g o r i " ) ; 
+                 } 
+ 
+                 i f   ( s t a t u s )   { 
+                         p a r a m s . s e t ( " p u b l i k _ s t a t u s " ,   s t a t u s ) ; 
+                 }   e l s e   { 
+                         p a r a m s . d e l e t e ( " p u b l i k _ s t a t u s " ) ; 
+                 } 
+ 
+                 p a r a m s . d e l e t e ( " p a g e " ) ; 
+ 
+                 c o n s t   q u e r y S t r i n g   =   p a r a m s . t o S t r i n g ( ) ; 
+                 c o n s t   n e w U r l   =   q u e r y S t r i n g   ?   " / s i s w a / d a s h b o a r d ? "   +   q u e r y S t r i n g   :   " / s i s w a / d a s h b o a r d " ; 
+ 
+                 w i n d o w . h i s t o r y . p u s h S t a t e ( { } ,   " " ,   n e w U r l ) ; 
+                 w i n d o w . l o c a t i o n . r e l o a d ( ) ; 
+         } 
+ 
+         s e a r c h I n p u t . a d d E v e n t L i s t e n e r ( " i n p u t " ,   ( )   = >   { 
+                 c l e a r T i m e o u t ( s e a r c h T i m e o u t ) ; 
+                 s e a r c h T i m e o u t   =   s e t T i m e o u t ( u p d a t e P u b l i k F i l t e r s ,   5 0 0 ) ; 
+         } ) ; 
+ 
+         c a t e g o r y S e l e c t . a d d E v e n t L i s t e n e r ( " c h a n g e " ,   u p d a t e P u b l i k F i l t e r s ) ; 
+         s t a t u s S e l e c t . a d d E v e n t L i s t e n e r ( " c h a n g e " ,   u p d a t e P u b l i k F i l t e r s ) ; 
+ 
+         r e s e t B u t t o n . a d d E v e n t L i s t e n e r ( " c l i c k " ,   ( )   = >   { 
+                 s e a r c h I n p u t . v a l u e   =   " " ; 
+                 c a t e g o r y S e l e c t . v a l u e   =   " " ; 
+                 s t a t u s S e l e c t . v a l u e   =   " " ; 
+                 w i n d o w . l o c a t i o n . h r e f   =   " / s i s w a / d a s h b o a r d " ; 
+         } ) ; 
+ 
+         f u n c t i o n   h i g h l i g h t A c t i v e F i l t e r s ( )   { 
+                 c o n s t   u r l P a r a m s   =   n e w   U R L S e a r c h P a r a m s ( w i n d o w . l o c a t i o n . s e a r c h ) ; 
+                 i f   ( u r l P a r a m s . h a s ( " p u b l i k _ q " )   | |   u r l P a r a m s . h a s ( " p u b l i k _ i d _ k a t e g o r i " )   | |   u r l P a r a m s . h a s ( " p u b l i k _ s t a t u s " ) )   { 
+                         r e s e t B u t t o n . c l a s s L i s t . a d d ( " r i n g - 2 " ,   " r i n g - g o l d " ,   " r i n g - o p a c i t y - 5 0 " ) ; 
+                 } 
+         } 
+ 
+         h i g h l i g h t A c t i v e F i l t e r s ( ) ; 
+ } ) ; 
+ < / s c r i p t >  
+ 
