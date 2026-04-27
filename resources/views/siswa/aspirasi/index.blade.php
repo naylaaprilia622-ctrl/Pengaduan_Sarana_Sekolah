@@ -5,7 +5,7 @@
 <div class="mb-6 flex items-center justify-between">
     <div>
         <h1 class="text-2xl font-bold text-navy">Riwayat Pengaduan Saya</h1>
-        <p class="text-light-brown text-sm mt-1">Semua pengaduan yang pernah Anda buat</p>
+        <p class="text-navy/80 text-sm mt-1">Semua pengaduan yang pernah Anda buat</p>
     </div>
     <a href="/siswa/aspirasi/create"
         class="inline-flex items-center gap-2 px-4 py-2 bg-brown text-white rounded-lg text-sm hover:bg-navy transition">
@@ -49,7 +49,7 @@
 
 <div class="bg-white rounded-xl shadow border border-light-brown/30">
     <div class="px-6 py-4 border-b border-light-brown/30">
-        <p class="text-sm text-light-brown">Total: <span class="font-semibold text-navy">{{ $aspirasis->total() }}</span> pengaduan</p>
+        <p class="text-sm text-navy/80">Total: <span class="font-semibold text-navy">{{ $aspirasis->total() }}</span> pengaduan</p>
     </div>
     <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -67,14 +67,14 @@
             <tbody class="divide-y divide-light-brown/30">
                 @forelse($aspirasis as $i => $aspirasi)
                 <tr class="hover:bg-light-brown/20 transition">
-                    <td class="px-4 py-3 text-light-brown">{{ $aspirasis->firstItem() + $i }}</td>
+                    <td class="px-4 py-3 text-navy/80">{{ $aspirasis->firstItem() + $i }}</td>
                     <td class="px-4 py-3 font-medium text-navy">{{ $aspirasi->kategori->ket_kategori ?? '-' }}</td>
-                    <td class="px-4 py-3 text-light-brown">{{ $aspirasi->inputAspirasi->lokasi ?? '-' }}</td>
+                    <td class="px-4 py-3 text-navy/70">{{ $aspirasi->inputAspirasi->lokasi ?? '-' }}</td>
                     <td class="px-4 py-3">
                         @include('components.badge-status', ['status' => $aspirasi->status])
                     </td>
-                    <td class="px-4 py-3 text-light-brown text-xs">
-                        <div><i class="fa-solid fa-clock mr-1 text-light-brown"></i>{{ $aspirasi->created_at->format('d/m/Y H:i') }}</div>
+                    <td class="px-4 py-3 text-navy/70 text-xs">
+                        <div><i class="fa-solid fa-clock mr-1 text-navy/70"></i>{{ $aspirasi->created_at->format('d/m/Y H:i') }}</div>
                         @if($aspirasi->diproses_at)
                         <div class="mt-0.5 text-brown"><i class="fa-solid fa-arrows-spin mr-1"></i>{{ $aspirasi->diproses_at->format('d/m/Y H:i') }}</div>
                         @endif
@@ -82,11 +82,11 @@
                         <div class="mt-0.5 text-green-600"><i class="fa-solid fa-circle-check mr-1"></i>{{ $aspirasi->diselesaikan_at->format('d/m/Y H:i') }}</div>
                         @endif
                     </td>
-                    <td class="px-4 py-3 text-light-brown">
+                    <td class="px-4 py-3 text-navy/70">
                         @if($aspirasi->feedback)
                         <span class="text-green-700 text-xs"><i class="fa-solid fa-circle-check mr-1"></i>Ada</span>
                         @else
-                        <span class="text-light-brown text-xs">Belum ada</span>
+                        <span class="text-navy/70 text-xs">Belum ada</span>
                         @endif
                     </td>
                     <td class="px-4 py-3">

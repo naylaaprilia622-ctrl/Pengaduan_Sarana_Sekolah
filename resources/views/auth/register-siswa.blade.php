@@ -5,12 +5,11 @@
 @section('content')
 <div class="w-full max-w-md">
     <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gold/20">
-        
+
         {{-- Header --}}
         <div class="bg-navy px-8 py-7 text-center">
-            <i class="fa-solid fa-school text-gold text-4xl mb-3"></i>
             <h1 class="text-white text-xl font-bold">Pengaduan Sarana Sekolah</h1>
-            <p class="text-light-brown text-sm mt-1">Daftar Akun Siswa</p>
+            <p class="text-cream/80 text-sm mt-1">Daftar Akun Siswa</p>
         </div>
 
         {{-- Form --}}
@@ -85,13 +84,12 @@
                             <i class="fa-solid fa-lock"></i>
                         </span>
 
-                        <input 
-                            type="password" 
+                        <input
+                            type="password"
                             id="password"
                             name="password"
                             placeholder="Minimal 6 karakter"
-                            class="w-full pl-10 pr-10 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown @error('password') border-red-400 bg-red-50 @enderror"
-                        >
+                            class="w-full pl-10 pr-10 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown @error('password') border-red-400 bg-red-50 @enderror">
 
                         <span onclick="togglePassword()" class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-light-brown">
                             <i id="eyeIcon" class="fa-solid fa-eye"></i>
@@ -112,13 +110,12 @@
                             <i class="fa-solid fa-lock"></i>
                         </span>
 
-                        <input 
-                            type="password" 
+                        <input
+                            type="password"
                             id="confirmPassword"
                             name="password_confirmation"
                             placeholder="Ulangi password"
-                            class="w-full pl-10 pr-10 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown"
-                        >
+                            class="w-full pl-10 pr-10 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown">
 
                         <span onclick="toggleConfirmPassword()" class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-light-brown">
                             <i id="eyeIconConfirm" class="fa-solid fa-eye"></i>
@@ -151,31 +148,31 @@
 
 {{-- SCRIPT --}}
 <script>
-function togglePassword() {
-    const input = document.getElementById("password");
-    const icon = document.getElementById("eyeIcon");
+    function togglePassword() {
+        const input = document.getElementById("password");
+        const icon = document.getElementById("eyeIcon");
 
-    if (input.type === "password") {
-        input.type = "text";
-        icon.classList.replace("fa-eye", "fa-eye-slash");
-    } else {
-        input.type = "password";
-        icon.classList.replace("fa-eye-slash", "fa-eye");
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
     }
-}
 
-function toggleConfirmPassword() {
-    const input = document.getElementById("confirmPassword");
-    const icon = document.getElementById("eyeIconConfirm");
+    function toggleConfirmPassword() {
+        const input = document.getElementById("confirmPassword");
+        const icon = document.getElementById("eyeIconConfirm");
 
-    if (input.type === "password") {
-        input.type = "text";
-        icon.classList.replace("fa-eye", "fa-eye-slash");
-    } else {
-        input.type = "password";
-        icon.classList.replace("fa-eye-slash", "fa-eye");
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
     }
-}
 </script>
 
 @endsection

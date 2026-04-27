@@ -5,7 +5,7 @@
 @section('content')
 <div class="mb-6">
     <h1 class="text-2xl font-bold text-navy">Daftar Aspirasi</h1>
-    <p class="text-light-brown text-sm mt-1">Kelola semua pengaduan siswa</p>
+    <p class="text-navy/80 text-sm mt-1">Kelola semua pengaduan siswa</p>
 </div>
 
 {{-- Filter --}}
@@ -80,7 +80,7 @@
 {{-- Tabel --}}
 <div class="bg-white rounded-xl shadow border border-light-brown/30">
     <div class="px-6 py-4 border-b border-light-brown/30">
-        <p class="text-sm text-light-brown">Menampilkan <span class="font-semibold text-navy">{{ $aspirasis->total() }}</span> aspirasi</p>
+        <p class="text-sm text-navy/80">Menampilkan <span class="font-semibold text-navy">{{ $aspirasis->total() }}</span> aspirasi</p>
     </div>
     <div class="overflow-x-auto">
         <table class="w-full text-sm">

@@ -30,10 +30,9 @@
     <aside class="fixed top-0 left-0 h-full w-64 bg-navy text-white flex flex-col z-50">
         {{-- Logo --}}
         <div class="flex items-center gap-3 px-6 py-5 border-b border-navy/50">
-            <i class="fa-solid fa-school text-gold text-2xl"></i>
             <div>
-                <p class="font-bold text-sm leading-tight">Pengaduan Sarana</p>
-                <p class="text-xs text-light-brown">Sekolah</p>
+                <p class="font-bold text-cream text-sm leading-tight">Pengaduan Sarana</p>
+                <p class="text-xs text-cream/80">Sekolah</p>
             </div>
         </div>
 

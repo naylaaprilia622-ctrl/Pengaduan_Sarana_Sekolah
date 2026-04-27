@@ -32,7 +32,6 @@
             <div class="flex items-center justify-between h-16">
                 {{-- Kiri: Logo --}}
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-school text-navy text-xl"></i>
                     <span class="font-bold text-navy text-sm">Pengaduan Sarana Sekolah</span>
                 </div>
 

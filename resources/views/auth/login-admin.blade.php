@@ -5,12 +5,11 @@
 @section('content')
 <div class="w-full max-w-md">
     <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gold/20">
-        
+
         {{-- Header --}}
         <div class="bg-navy px-8 py-8 text-center">
-            <i class="fa-solid fa-school text-gold text-5xl mb-3"></i>
             <h1 class="text-white text-xl font-bold">Pengaduan Sarana Sekolah</h1>
-            <p class="text-light-brown text-sm mt-1">Portal Admin</p>
+            <p class="text-cream/80 text-sm mt-1">Portal Admin</p>
         </div>
 
         {{-- Form --}}
@@ -54,19 +53,17 @@
                         </span>
 
                         <!-- Input -->
-                        <input 
-                            type="password" 
+                        <input
+                            type="password"
                             id="passwordAdmin"
                             name="password"
                             placeholder="Masukkan password"
-                            class="w-full pl-10 pr-10 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown @error('password') border-red-400 @enderror"
-                        >
+                            class="w-full pl-10 pr-10 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown @error('password') border-red-400 @enderror">
 
                         <!-- Icon Mata -->
-                        <span 
-                            onclick="togglePasswordAdmin()" 
-                            class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-light-brown"
-                        >
+                        <span
+                            onclick="togglePasswordAdmin()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-light-brown">
                             <i id="eyeIconAdmin" class="fa-solid fa-eye"></i>
                         </span>
 
@@ -96,20 +93,20 @@
 
 {{-- SCRIPT TOGGLE PASSWORD --}}
 <script>
-function togglePasswordAdmin() {
-    const password = document.getElementById("passwordAdmin");
-    const icon = document.getElementById("eyeIconAdmin");
+    function togglePasswordAdmin() {
+        const password = document.getElementById("passwordAdmin");
+        const icon = document.getElementById("eyeIconAdmin");
 
-    if (password.type === "password") {
-        password.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
-    } else {
-        password.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
+        if (password.type === "password") {
+            password.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            password.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
     }
-}
 </script>
 
 @endsection
