@@ -47,14 +47,14 @@ class SiswaAuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'nis'                  => 'required|numeric|digits_between:4,10|unique:siswas,nis',
+            'nis'                  => 'required|numeric|digits_between:4,8|unique:siswas,nis',
             'nama'                 => 'required|string|max:100',
             'kelas'                => 'required|string|max:10',
             'password'             => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required',
         ], [
             'nis.unique'           => 'NIS tersebut sudah terdaftar.',
-            'nis.digits_between'   => 'NIS harus berupa angka 4-10 digit.',
+            'nis.digits_between'   => 'NIS harus berupa angka 4-8 digit.',
             'password.min'         => 'Password minimal 6 karakter.',
             'password.confirmed'   => 'Konfirmasi password tidak cocok.',
         ]);

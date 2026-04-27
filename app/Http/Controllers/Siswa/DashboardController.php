@@ -54,6 +54,11 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('siswa.dashboard', compact('siswa', 'statistik', 'aspirasiBaru', 'statusOptions', 'kategoris'));
+        // Data pengaduan publik untuk section beranda
+        $aspirasisPublik = Aspirasi::with(['siswa', 'kategori', 'inputAspirasi'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(8);
+
+        return view('siswa.dashboard', compact('siswa', 'statistik', 'aspirasiBaru', 'statusOptions', 'kategoris', 'aspirasisPublik'));
     }
 }

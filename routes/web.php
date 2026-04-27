@@ -58,6 +58,8 @@ Route::prefix('admin')->middleware('auth.admin')->group(function () {
     Route::get('/siswa',         [Admin\SiswaController::class, 'index']);
     Route::get('/siswa/tambah',  [Admin\SiswaController::class, 'create']);
     Route::post('/siswa',        [Admin\SiswaController::class, 'store']);
+    Route::get('/siswa/{nis}/edit', [Admin\SiswaController::class, 'edit']);
+    Route::put('/siswa/{nis}',   [Admin\SiswaController::class, 'update']);
     Route::delete('/siswa/{nis}', [Admin\SiswaController::class, 'destroy']);
 
     // Manajemen Kategori

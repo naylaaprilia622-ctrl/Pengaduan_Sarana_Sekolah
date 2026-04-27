@@ -40,15 +40,21 @@
                         </span>
                     </td>
                     <td class="px-4 py-3 text-center">
-                        <form action="/admin/siswa/{{ $siswa->nis }}" method="POST"
-                            onsubmit="return confirm('Hapus siswa {{ $siswa->nama }}? Semua pengaduan miliknya juga akan terhapus.')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-red-600 text-white rounded-lg text-xs hover:bg-red-700 transition">
-                                <i class="fa-solid fa-trash"></i> Hapus
-                            </button>
-                        </form>
+                        <div class="flex items-center justify-center gap-2">
+                            <a href="/admin/siswa/{{ $siswa->nis }}/edit"
+                                class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs hover:bg-blue-700 transition">
+                                <i class="fa-solid fa-pen"></i> Edit
+                            </a>
+                            <form action="/admin/siswa/{{ $siswa->nis }}" method="POST"
+                                onsubmit="return confirm('Hapus siswa {{ $siswa->nama }}? Semua pengaduan miliknya juga akan terhapus.')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="inline-flex items-center gap-1 px-3 py-1.5 bg-red-600 text-white rounded-lg text-xs hover:bg-red-700 transition">
+                                    <i class="fa-solid fa-trash"></i> Hapus
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @empty

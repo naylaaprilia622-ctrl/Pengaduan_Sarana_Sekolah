@@ -316,40 +316,105 @@
     </div>
 </div>
 
-<script>
-    const searchInput = document.getElementById('dashboard-search-input');
-    const categorySelect = document.getElementById('dashboard-category-select');
-    const statusSelect = document.getElementById('dashboard-status-select');
-    const resetButton = document.getElementById('dashboard-reset-button');
+{{-- Daftar Pengaduan Publik --}}
+<div class="mt-12 animate-fade-in-up">
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-navy mb-2">Daftar Pengaduan Sekolah</h2>
+        <p class="text-navy/80 text-sm">Lihat semua pengaduan yang telah diajukan siswa lainnya</p>
+    </div>
 
-    let dashboardSearchTimeout;
+    <div class="modern-table rounded-2xl shadow-xl border border-white/20">
+        <div class="px-8 py-6 border-b border-light-brown/30 bg-gradient-to-r from-navy to-brown">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-school text-gold text-xl"></i>
+                    <h3 class="font-bold text-white text-lg">Pengaduan Terbaru</h3>
+                </div>
+                <p class="text-sm text-gold/80">Semua pengaduan dari seluruh siswa</p>
+                <a href="/" class="text-sm text-gold hover:text-white transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-right"></i> Lihat Beranda
+                </a>
+            </div>
+        </div>
 
-    function updateDashboardFilters() {
-        const params = new URLSearchParams();
-        const query = searchInput.value.trim();
-        const category = categorySelect.value;
-        const status = statusSelect.value;
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead class="bg-gradient-to-r from-navy to-brown text-white">
+                    <tr>
+                        <th class="px-6 py-4 text-left font-semibold">No</th>
+                        <th class="px-6 py-4 text-left font-semibold">Siswa</th>
+                        <th class="px-6 py-4 text-left font-semibold">Kategori</th>
+                        <th class="px-6 py-4 text-left font-semibold">Lokasi</th>
+                        <th class="px-6 py-4 text-left font-semibold">Status</th>
+                        <th class="px-6 py-4 text-left font-semibold">Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-light-brown/20">
+                    @forelse($aspirasisPublik ?? [] as $index => $aspirasi)
+                    <tr class="hover:bg-gradient-to-r hover:from-gold/5 hover:to-transparent transition-all duration-300 card-hover">
+                        <td class="px-6 py-4 text-navy/80 font-medium">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4 font-semibold text-navy">{{ $aspirasi->siswa->nama ?? '-' }}</td>
+                        <td class="px-6 py-4 text-navy/70">{{ $aspirasi->kategori->ket_kategori ?? '-' }}</td>
+                        <td class="px-6 py-4 text-navy/70">{{ $aspirasi->inputAspirasi->lokasi ?? '-' }}</td>
+                        <td class="px-6 py-4">
+                            @include('components.badge-status', ['status' => $aspirasi->status])
+                        </td>
+                        <td class="px-6 py-4 text-navy/70">{{ $aspirasi->created_at->format('d/m/Y') }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center text-navy/70">
+                            <div class="flex flex-col items-center gap-3">
+                                <i class="fa-solid fa-inbox text-5xl text-navy/30"></i>
+                                <p class="text-lg">Belum ada pengaduan</p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
 
-        if (query) params.set('q', query);
-        if (category) params.set('id_kategori', category);
-        if (status) params.set('status', status);
+        @if(isset($aspirasisPublik) && $aspirasisPublik->hasPages())
+        <div class="px-6 py-4 border-t border-light-brown/30 flex justify-center">
+            {{ $aspirasisPublik->links() }}
+        </div>
+        @endif
+    </div>
+</div>
+const searchInput = document.getElementById('dashboard-search-input');
+const categorySelect = document.getElementById('dashboard-category-select');
+const statusSelect = document.getElementById('dashboard-status-select');
+const resetButton = document.getElementById('dashboard-reset-button');
 
-        const queryString = params.toString();
-        window.location.href = queryString ? `/siswa/dashboard?${queryString}` : '/siswa/dashboard';
-    }
+let dashboardSearchTimeout;
 
-    searchInput.addEventListener('input', () => {
-        clearTimeout(dashboardSearchTimeout);
-        dashboardSearchTimeout = setTimeout(updateDashboardFilters, 350);
-    });
+function updateDashboardFilters() {
+const params = new URLSearchParams();
+const query = searchInput.value.trim();
+const category = categorySelect.value;
+const status = statusSelect.value;
 
-    categorySelect.addEventListener('change', updateDashboardFilters);
-    statusSelect.addEventListener('change', updateDashboardFilters);
-    resetButton.addEventListener('click', () => {
-        searchInput.value = '';
-        categorySelect.value = '';
-        statusSelect.value = '';
-        updateDashboardFilters();
-    });
+if (query) params.set('q', query);
+if (category) params.set('id_kategori', category);
+if (status) params.set('status', status);
+
+const queryString = params.toString();
+window.location.href = queryString ? `/siswa/dashboard?${queryString}` : '/siswa/dashboard';
+}
+
+searchInput.addEventListener('input', () => {
+clearTimeout(dashboardSearchTimeout);
+dashboardSearchTimeout = setTimeout(updateDashboardFilters, 350);
+});
+
+categorySelect.addEventListener('change', updateDashboardFilters);
+statusSelect.addEventListener('change', updateDashboardFilters);
+resetButton.addEventListener('click', () => {
+searchInput.value = '';
+categorySelect.value = '';
+statusSelect.value = '';
+updateDashboardFilters();
+});
 </script>
 @endsection

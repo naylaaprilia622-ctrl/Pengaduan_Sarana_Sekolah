@@ -33,8 +33,8 @@
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-light-brown">
                             <i class="fa-solid fa-id-card"></i>
                         </span>
-                        <input type="number" name="nis" value="{{ old('nis') }}"
-                            placeholder="Masukkan NIS Anda"
+                        <input type="number" name="nis" value="{{ old('nis') }}" maxlength="8"
+                            placeholder="Masukkan NIS Anda (maksimal 8 digit)"
                             class="w-full pl-10 pr-4 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown @error('nis') border-red-400 bg-red-50 @enderror">
                     </div>
                     @error('nis')
