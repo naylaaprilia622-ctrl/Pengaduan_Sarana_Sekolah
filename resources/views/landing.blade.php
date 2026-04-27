@@ -485,7 +485,9 @@
             <div class="flex items-center gap-2 animate-fade-in-up">
                 <span class="text-cream font-semibold text-sm">Pengaduan Sarana Sekolah</span>
             </div>
-            <p class="text-cream/80 text-sm animate-fade-in-up">UKK SMK Rekayasa Perangkat Lunak — KM25.4.1.1 Paket 3</p>
+            <p class="text-cream/80 text-sm animate-fade-in-up">UKK SMK Rekayasa Perangkat Lunak - Nayla Aprilia - XI RPL 3</p>
+                        <p class="text-cream/80 text-sm animate-fade-in-up">Wali Kelas & Guru pembimbing : Debbie Fransurya S.Kom.</p>
+
             <a href="/login/admin" class="text-cream hover:text-gold text-xs transition-all duration-300 hover:scale-105 animate-fade-in-up">
                 <i class="fa-solid fa-user-shield mr-1"></i>Admin
             </a>
