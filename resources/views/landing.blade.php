@@ -615,6 +615,17 @@
                 }
 
                 attachPaginationListeners();
+
+                // Auto-scroll ke tabel setelah konten diperbarui
+                setTimeout(() => {
+                    const tableSection = document.getElementById('daftar-pengaduan');
+                    if (tableSection) {
+                        tableSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 100);
             }
 
             function performSearch() {
@@ -653,6 +664,17 @@
                         </div>
                     `;
                     });
+
+                // Auto-scroll ke tabel setelah pencarian
+                setTimeout(() => {
+                    const tableSection = document.getElementById('daftar-pengaduan');
+                    if (tableSection) {
+                        tableSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 100);
             }
 
             function resetFilters() {
