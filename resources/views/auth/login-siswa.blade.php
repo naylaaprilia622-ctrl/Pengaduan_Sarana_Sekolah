@@ -41,7 +41,7 @@
                             <i class="fa-solid fa-id-card"></i>
                         </span>
                         <input type="number" name="nis" value="{{ old('nis') }}"
-                            placeholder="Masukkan NIS"
+                            placeholder="Masukkan NIS" maxlength="8"
                             class="w-full pl-10 pr-4 py-2.5 border border-light-brown rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brown @error('nis') border-red-400 @enderror">
                     </div>
                     @error('nis')
@@ -118,6 +118,40 @@
             icon.classList.add("fa-eye");
         }
     }
+
+    // Script untuk membatasi input NIS maksimal 8 digit
+    document.addEventListener('DOMContentLoaded', function() {
+        const nisInput = document.querySelector('input[name="nis"]');
+
+        nisInput.addEventListener('input', function(e) {
+            // Jika panjang nilai sudah 8 karakter, cegah input lebih lanjut
+            if (this.value.length > 8) {
+                this.value = this.value.slice(0, 8);
+            }
+        });
+
+        nisInput.addEventListener('keydown', function(e) {
+            // Jika panjang sudah 8 karakter dan bukan backspace/delete/arrow keys, cegah input
+            if (this.value.length >= 8 &&
+                e.key !== 'Backspace' &&
+                e.key !== 'Delete' &&
+                e.key !== 'ArrowLeft' &&
+                e.key !== 'ArrowRight' &&
+                e.key !== 'Tab' &&
+                !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+            }
+        });
+
+        nisInput.addEventListener('paste', function(e) {
+            // Tangani paste untuk memastikan maksimal 8 karakter
+            setTimeout(() => {
+                if (this.value.length > 8) {
+                    this.value = this.value.slice(0, 8);
+                }
+            }, 0);
+        });
+    });
 </script>
 
 @endsection

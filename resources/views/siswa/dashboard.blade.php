@@ -382,39 +382,4 @@
         @endif
     </div>
 </div>
-const searchInput = document.getElementById('dashboard-search-input');
-const categorySelect = document.getElementById('dashboard-category-select');
-const statusSelect = document.getElementById('dashboard-status-select');
-const resetButton = document.getElementById('dashboard-reset-button');
-
-let dashboardSearchTimeout;
-
-function updateDashboardFilters() {
-const params = new URLSearchParams();
-const query = searchInput.value.trim();
-const category = categorySelect.value;
-const status = statusSelect.value;
-
-if (query) params.set('q', query);
-if (category) params.set('id_kategori', category);
-if (status) params.set('status', status);
-
-const queryString = params.toString();
-window.location.href = queryString ? `/siswa/dashboard?${queryString}` : '/siswa/dashboard';
-}
-
-searchInput.addEventListener('input', () => {
-clearTimeout(dashboardSearchTimeout);
-dashboardSearchTimeout = setTimeout(updateDashboardFilters, 350);
-});
-
-categorySelect.addEventListener('change', updateDashboardFilters);
-statusSelect.addEventListener('change', updateDashboardFilters);
-resetButton.addEventListener('click', () => {
-searchInput.value = '';
-categorySelect.value = '';
-statusSelect.value = '';
-updateDashboardFilters();
-});
-</script>
 @endsection

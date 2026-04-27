@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class SiswaAuthController extends Controller
@@ -20,20 +21,47 @@ class SiswaAuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'nis'      => 'required|numeric',
+            'nis'      => 'required|numeric|digits_between:4,8',
             'password' => 'required|string',
+        ], [
+            'nis.digits_between' => 'NIS harus berupa angka 4-8 digit.',
         ]);
 
-        $siswa = Siswa::where('nis', $request->nis)->first();
+        $maxRetries = 3;
+        $retryDelay = 1; // seconds
 
-        if (!$siswa || !Hash::check($request->password, $siswa->password)) {
-            return back()->with('error', 'NIS atau password salah.')->withInput();
+        for ($attempt = 1; $attempt <= $maxRetries; $attempt++) {
+            try {
+                $siswa = Siswa::where('nis', $request->nis)->first();
+
+                if (!$siswa || !Hash::check($request->password, $siswa->password)) {
+                    return back()->with('error', 'NIS atau password salah.')->withInput();
+                }
+
+                session()->put('siswa_nis', $siswa->nis);
+                session()->put('siswa_nama', $siswa->nama);
+
+                return redirect('/siswa/dashboard');
+            } catch (\Exception $e) {
+                // Jika ini adalah attempt terakhir, throw error
+                if ($attempt === $maxRetries) {
+                    // Log error untuk debugging
+                    \Log::error('Database connection error during login: ' . $e->getMessage());
+
+                    return back()->with('error', 'Terjadi kesalahan koneksi database. Silakan coba lagi dalam beberapa saat.')->withInput();
+                }
+
+                // Tunggu sebelum retry
+                sleep($retryDelay);
+
+                // Reconnect database connection
+                try {
+                    DB::reconnect();
+                } catch (\Exception $reconnectError) {
+                    \Log::error('Database reconnect failed: ' . $reconnectError->getMessage());
+                }
+            }
         }
-
-        session()->put('siswa_nis', $siswa->nis);
-        session()->put('siswa_nama', $siswa->nama);
-
-        return redirect('/siswa/dashboard');
     }
 
     public function showRegister()
