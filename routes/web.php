@@ -83,5 +83,7 @@ Route::prefix('siswa')->middleware('auth.siswa')->group(function () {
     Route::get('/aspirasi/{id}',      [Siswa\AspirasiController::class, 'show']);
     Route::delete('/aspirasi/{id}',   [Siswa\AspirasiController::class, 'destroy']);
 
+    Route::get('/pengaduan-sekolah',  [Siswa\PengaduanSekolahController::class, 'index']);
+
     Route::post('/logout', [SiswaAuthController::class, 'logout']);
 });

@@ -42,15 +42,15 @@
                               {{ request()->is('siswa/dashboard') ? 'bg-navy text-white' : 'text-navy hover:bg-light-brown/30' }}">
                         <i class="fa-solid fa-house"></i> Dashboard
                     </a>
-                    <a href="/siswa/aspirasi/create"
-                        class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition
-                              {{ request()->is('siswa/aspirasi/create') ? 'bg-navy text-white' : 'text-navy hover:bg-light-brown/30' }}">
-                        <i class="fa-solid fa-plus"></i> Buat Pengaduan
-                    </a>
                     <a href="/siswa/aspirasi"
                         class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition
                               {{ request()->is('siswa/aspirasi') ? 'bg-navy text-white' : 'text-navy hover:bg-light-brown/30' }}">
-                        <i class="fa-solid fa-clock-rotate-left"></i> Riwayat
+                        <i class="fa-solid fa-clock-rotate-left"></i> Riwayat Saya
+                    </a>
+                    <a href="/siswa/pengaduan-sekolah"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition
+                              {{ request()->is('siswa/pengaduan-sekolah') ? 'bg-navy text-white' : 'text-navy hover:bg-light-brown/30' }}">
+                        <i class="fa-solid fa-list-check"></i> Daftar Pengaduan
                     </a>
                 </div>
 
@@ -77,11 +77,11 @@
             <a href="/siswa/dashboard" class="flex-1 flex flex-col items-center py-2 text-xs text-navy hover:text-brown">
                 <i class="fa-solid fa-house mb-1"></i> Dashboard
             </a>
-            <a href="/siswa/aspirasi/create" class="flex-1 flex flex-col items-center py-2 text-xs text-navy hover:text-brown">
-                <i class="fa-solid fa-plus mb-1"></i> Buat
-            </a>
             <a href="/siswa/aspirasi" class="flex-1 flex flex-col items-center py-2 text-xs text-navy hover:text-brown">
                 <i class="fa-solid fa-clock-rotate-left mb-1"></i> Riwayat
+            </a>
+            <a href="/siswa/pengaduan-sekolah" class="flex-1 flex flex-col items-center py-2 text-xs text-navy hover:text-brown">
+                <i class="fa-solid fa-list-check mb-1"></i> Daftar
             </a>
         </div>
     </nav>

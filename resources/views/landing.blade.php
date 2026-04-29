@@ -137,31 +137,48 @@
         .float {
             animation: float 3s ease-in-out infinite;
         }
+
+        /* Hero Background Enhancement */
+        .hero-bg {
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-light-brown/20 font-sans">
 
     {{-- Navbar --}}
-    <nav class="fixed top-0 left-0 right-0 z-50 glass shadow-lg animate-fade-in-up">
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-10 shadow-lg animate-fade-in-up">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             {{-- Logo --}}
             <div class="flex items-center gap-3 group">
                 <div>
-                    <p class="font-bold text-cream text-sm leading-tight group-hover:text-gold transition-colors duration-300">Pengaduan Sarana</p>
-                    <p class="text-xs text-cream/80 leading-tight">Sekolah</p>
+                    <p class="font-bold text-gold text-sm leading-tight group-hover:text-black transition-colors duration-200">Pengaduan Sarana</p>
+                    <p class="text-xs text-gold/80 leading-tight">Sekolah</p>
                 </div>
             </div>
 
             {{-- Menu Tengah --}}
             <div class="hidden md:flex items-center gap-8">
-                <a href="#tentang" class="text-cream hover:text-gold font-semibold text-sm transition-all duration-300 hover:scale-105 relative group">
-                    Tentang
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                <a href="#beranda" class="text-gold hover:text-black font-semibold text-sm transition-all duration-300 hover:scale-105 relative group">
+                    Beranda
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cream transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="#daftar-pengaduan" class="text-cream hover:text-gold font-semibold text-sm transition-all duration-300 hover:scale-105 relative group">
+                <a href="#tentang" class="text-gold hover:text-black font-semibold text-sm transition-all duration-300 hover:scale-105 relative group">
+                    Tentang
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cream transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#daftar-pengaduan" class="text-gold hover:text-black font-semibold text-sm transition-all duration-300 hover:scale-105 relative group">
                     Daftar Pengaduan
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cream transition-all duration-300 group-hover:w-full"></span>
                 </a>
             </div>
 
@@ -176,9 +193,17 @@
     </nav>
 
     {{-- Hero Section --}}
-    <section class="min-h-screen gradient-bg flex items-center pt-16 relative overflow-hidden">
+    <section id="beranda" class="min-h-screen relative flex items-center pt-16 overflow-hidden">
+        {{-- Background Image --}}
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg"
+            style="background-image: url('/img/aya.jpg');">
+        </div>
+
+        {{-- Overlay Gradient --}}
+        <div class="absolute inset-0 bg-gradient-to-br from-navy/60 via-navy/50 to-brown/60"></div>
+
         {{-- Background Pattern --}}
-        <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 opacity-20">
             <div class="absolute top-20 left-20 w-32 h-32 bg-gold rounded-full blur-3xl"></div>
             <div class="absolute bottom-20 right-20 w-48 h-48 bg-brown rounded-full blur-3xl"></div>
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-navy rounded-full blur-3xl"></div>
@@ -415,6 +440,9 @@
                     <thead class="bg-navy text-white rounded-t-3xl">
                         <tr>
                             <th class="px-4 py-4">#</th>
+                            <th class="px-4 py-4">NIS</th>
+                            <th class="px-4 py-4">Nama Siswa</th>
+                            <th class="px-4 py-4">Kelas</th>
                             <th class="px-4 py-4">Kategori</th>
                             <th class="px-4 py-4">Lokasi</th>
                             <th class="px-4 py-4">Keterangan</th>
@@ -426,6 +454,9 @@
                         @forelse($aspirasis as $i => $aspirasi)
                         <tr class="hover:bg-light-brown/10 transition-all duration-300 hover:shadow-md hover:scale-[1.01] card-hover">
                             <td class="px-4 py-4 text-light-brown">{{ $aspirasis->firstItem() + $i }}</td>
+                            <td class="px-4 py-4 font-semibold text-navy">{{ $aspirasi->nis }}</td>
+                            <td class="px-4 py-4 text-light-brown">{{ $aspirasi->siswa->nama ?? '-' }}</td>
+                            <td class="px-4 py-4 text-light-brown">{{ $aspirasi->siswa->kelas ?? '-' }}</td>
                             <td class="px-4 py-4 font-semibold text-navy">{{ $aspirasi->kategori->ket_kategori ?? '-' }}</td>
                             <td class="px-4 py-4 text-light-brown">{{ $aspirasi->inputAspirasi->lokasi ?? '-' }}</td>
                             <td class="px-4 py-4 text-light-brown max-w-xl truncate">{{ $aspirasi->inputAspirasi->ket ?? '-' }}</td>
@@ -438,7 +469,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="px-4 py-8 text-center text-light-brown">Tidak ada pengaduan yang cocok dengan filter.</td>
+                            <td colspan="9" class="px-4 py-8 text-center text-light-brown">Tidak ada pengaduan yang cocok dengan filter.</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -483,10 +514,10 @@
         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-gold/5 to-transparent"></div>
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
             <div class="flex items-center gap-2 animate-fade-in-up">
-                <span class="text-cream font-semibold text-sm">Pengaduan Sarana Sekolah</span>
+                <span class="text-cream font-semibold text-sm">BERSEKOLAH DI SMKN NEGERI 7 BATAM</span>
             </div>
-            <p class="text-cream/80 text-sm animate-fade-in-up">UKK SMK Rekayasa Perangkat Lunak - Nayla Aprilia - XI RPL 3</p>
-                        <p class="text-cream/80 text-sm animate-fade-in-up">Wali Kelas & Guru pembimbing : Debbie Fransurya S.Kom.</p>
+            <p class="text-cream/80 text-sm animate-fade-in-up">By : Nayla Aprilia - XI RPL 3 -Tahun 2026</p>
+            <p class="text-cream/80 text-sm animate-fade-in-up">Wali Kelas & Guru pembimbing : Debbie Fransurya S.Kom.</p>
 
             <a href="/login/admin" class="text-cream hover:text-gold text-xs transition-all duration-300 hover:scale-105 animate-fade-in-up">
                 <i class="fa-solid fa-user-shield mr-1"></i>Admin

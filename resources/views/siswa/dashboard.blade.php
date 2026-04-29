@@ -87,7 +87,7 @@
 
     /* Glassmorphism Effect */
     .glass {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(163, 65, 65, 0.1);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
@@ -210,16 +210,6 @@
     </div>
 </div>
 
-{{-- Quick Action --}}
-<div class="mb-8 animate-fade-in-up">
-    <a href="/siswa/aspirasi/create"
-        class="quick-action-btn inline-flex items-center gap-3 px-6 py-4 text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300">
-        <i class="fa-solid fa-plus text-gold text-xl"></i>
-        <span>Buat Pengaduan Baru</span>
-        <i class="fa-solid fa-arrow-right text-gold"></i>
-    </a>
-</div>
-
 {{-- Pengaduan Terbaru --}}
 <div class="modern-table rounded-2xl shadow-xl border border-white/20 animate-fade-in-up">
     <div class="px-8 py-6 border-b border-light-brown/30 bg-gradient-to-r from-navy to-brown">
@@ -231,6 +221,16 @@
             <p class="text-sm text-gold/80">Filter berdasarkan status, kategori, atau kata kunci.</p>
             <a href="/siswa/aspirasi" class="text-sm text-gold hover:text-white transition-all duration-300 hover:scale-105 flex items-center gap-2">
                 <i class="fa-solid fa-arrow-right"></i> Lihat Semua
+            </a>
+        </div>
+
+        {{-- Quick Action Button --}}
+        <div class="mt-6 mb-4">
+            <a href="/siswa/aspirasi/create"
+                class="quick-action-btn inline-flex items-center gap-3 px-6 py-4 text-white rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300">
+                <i class="fa-solid fa-plus text-gold text-xl"></i>
+                <span>Buat Pengaduan Baru</span>
+                <i class="fa-solid fa-arrow-right text-gold"></i>
             </a>
         </div>
 
